@@ -3,7 +3,8 @@ function clickIt() {
 }
 
 function showInput1() {
-    alert(document.getElementById('input1').value);
+    let input1Value = document.getElementById('input1').value;
+    alert(input1Value);
 }
 
 function setInput2() {
