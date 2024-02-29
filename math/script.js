@@ -24,33 +24,61 @@ function calculate() {
 
     let finalXValue=addComponents(v1Cosine, v2Cosine);
     let finalYValue=addComponents(v1Sine,v2Sine);
+    
+    let scale = 25/[v1Cosine,v1Sine,v2Cosine,v2Sine,finalXValue,finalYValue].map(Math.abs).reduce((acc, n) => acc = Math.max(acc, n), 0);
 
-    document.getElementById('answer').innerText =`${finalXValue.toFixed(2)}R + ${finalYValue.toFixed(2)}U`;
+    let finalLength = Math.sqrt(finalXValue**2 + finalYValue**2);
+    // sine = o/h
+    // o = finalYValue
+    // h = finalLength
+    let finalAngle1 = Math.asin(finalYValue/finalLength) * 180;
+    let finalAngle2 = Math.acos(finalXValue/finalLength) * 180;
 
-    let l1 = phaserScene.drawLine(0, 0, v1Cosine, v1Sine, 0x0000FF);
-    let l2 = phaserScene.drawLine(0, 0, v2Cosine, v2Sine, 0xFF0000);
-    phaserScene.moveTo(phaserScene.drawLine(0, 0, v1Cosine, v1Sine, 0xFFFFFF), v2Cosine, v2Sine, finalXValue, finalYValue);
+    phaserScene.clearLines();
+    document.getElementById('answer').innerHTML =`${finalXValue.toFixed(2)}R ${(finalYValue >= 0)?'+':'-'} ${Math.abs(finalYValue).toFixed(2)}U`
+        + '<BR>'
+        + `${finalLength.toFixed(2)}∠${finalAngle1.toFixed(2)}° or `
+        + `${finalLength.toFixed(2)}∠${finalAngle2.toFixed(2)}°`;
+
+    phaserScene.drawLine(0, 0, v1Cosine*scale, v1Sine*scale, 0x0000FF);
+    phaserScene.drawLine(0, 0, v2Cosine*scale, v2Sine*scale, 0xFF0000);
+    phaserScene.moveTo(phaserScene.drawLine(0, 0, v1Cosine*scale, v1Sine*scale, 0x0000AA), v2Cosine*scale, v2Sine*scale, finalXValue*scale, finalYValue*scale);
 }
 
 class Example extends Phaser.Scene {
+    lines = [];
     sf = 10;
     constructor() { 
         super();
         phaserScene = this;
     }
 
-    preload () {
-        this.cameras.main.setZoom(.5);
-        this.cameras.main.pan(0, 0, 0);
+    clearLines() {
+        this.lines.forEach(line => {
+            console.log(`Destroying ${JSON.stringify(line)}`);
+            line.destroy();
+        });
+        this.lines = [];
+    }
+
+    drawAxes() {
         this.add.line(0, 0, -100*this.sf, 0*this.sf, 100*this.sf, 0*this.sf, 0x000000, .5).setOrigin(0);
         this.add.line(0, 0, 0*this.sf, -100*this.sf, 0*this.sf, 100*this.sf, 0x000000, .5).setOrigin(0);
+    }
+
+    preload () {
+        //this.cameras.main.setZoom(1);
+        this.cameras.main.pan(0, 0, 0);
+        this.drawAxes();
     }
 
     create () {
     }
 
     drawLine(x1, y1, x2, y2, color) {
-        return this.add.line(0, 0, x1*this.sf, -y1*this.sf, x2*this.sf, -y2*this.sf, color, 0.5).setOrigin(0);
+        let line = this.add.line(0, 0, x1*this.sf, -y1*this.sf, x2*this.sf, -y2*this.sf, color, 0.5).setOrigin(0).setName('line');
+        this.lines.push(line);
+        return line;
     }
 
     moveTo(line1, x, y, xf, yf) {
@@ -62,10 +90,10 @@ class Example extends Phaser.Scene {
             repeat: 0,
             duration: 2000,
             onComplete: _ => {
-                this.add.line(0, 0, 0, 0, xf*this.sf, -yf*this.sf, 0xFFFFFF).setOrigin(0)
+                let line = this.add.line(0, 0, 0, 0, xf*this.sf, -yf*this.sf, 0xFFFFFF).setOrigin(0).setName('Result');
+                this.lines.push(line);
             }
         });
-
     }
 }
 
