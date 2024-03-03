@@ -28,17 +28,13 @@ function calculate() {
     let scale = 25/[v1Cosine,v1Sine,v2Cosine,v2Sine,finalXValue,finalYValue].map(Math.abs).reduce((acc, n) => acc = Math.max(acc, n), 0);
 
     let finalLength = Math.sqrt(finalXValue**2 + finalYValue**2);
-    // sine = o/h
-    // o = finalYValue
-    // h = finalLength
-    let finalAngle1 = Math.asin(finalYValue/finalLength) * 180;
-    let finalAngle2 = Math.acos(finalXValue/finalLength) * 180;
+
+    let finalAngle = Math.atan(finalYValue/finalXValue) * 180;
 
     phaserScene.clearLines();
     document.getElementById('answer').innerHTML =`${finalXValue.toFixed(2)}R ${(finalYValue >= 0)?'+':'-'} ${Math.abs(finalYValue).toFixed(2)}U`
         + '<BR>'
-        + `${finalLength.toFixed(2)}∠${finalAngle1.toFixed(2)}° or `
-        + `${finalLength.toFixed(2)}∠${finalAngle2.toFixed(2)}°`;
+        + `${finalLength.toFixed(2)}∠${finalAngle.toFixed(2)}°`;
 
     phaserScene.drawLine(0, 0, v1Cosine*scale, v1Sine*scale, 0x0000FF);
     phaserScene.drawLine(0, 0, v2Cosine*scale, v2Sine*scale, 0xFF0000);
@@ -55,7 +51,6 @@ class Example extends Phaser.Scene {
 
     clearLines() {
         this.lines.forEach(line => {
-            console.log(`Destroying ${JSON.stringify(line)}`);
             line.destroy();
         });
         this.lines = [];
@@ -91,6 +86,12 @@ class Example extends Phaser.Scene {
             duration: 2000,
             onComplete: _ => {
                 let line = this.add.line(0, 0, 0, 0, xf*this.sf, -yf*this.sf, 0xFFFFFF).setOrigin(0).setName('Result');
+                this.lines.push(line);
+                line1.destroy();
+                this.lines = this.lines.filter(aLine => aLine !== line1);
+                line = this.add.line(0, 0, 0, 0, xf*this.sf, 0, 0xFFFFFF).setOrigin(0);
+                this.lines.push(line);
+                line = this.add.line(xf*this.sf, 0, 0, 0, 0, -yf*this.sf, 0xFFFFFF).setOrigin(0);
                 this.lines.push(line);
             }
         });
