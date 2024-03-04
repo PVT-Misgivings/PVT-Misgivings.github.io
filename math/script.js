@@ -29,7 +29,7 @@ function calculate() {
 
     let finalLength = Math.sqrt(finalXValue**2 + finalYValue**2);
 
-    let finalAngle = Math.atan(finalYValue/finalXValue) * 180;
+    let finalAngle = Math.atan2(finalYValue,finalXValue) * 180 / Math.PI;
 
     phaserScene.clearLines();
     document.getElementById('answer').innerHTML =`${finalXValue.toFixed(2)}R ${(finalYValue >= 0)?'+':'-'} ${Math.abs(finalYValue).toFixed(2)}U`
