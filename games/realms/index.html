@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Phaser - Template</title>
+  <script type="module" crossorigin src="./assets/index-BVcunwvN.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/phaser-C2_wa_Fb.js">
+</head>
+
+<body>
+    <div id="app">
+        <div id="game-container"></div>
+        <div class="controls" id="controls">
+            <!-- <input type="button" value="Cycle Tile" onclick="switchTile()"> -->
+            <div class="leftControls">
+                <img width="50px" class="tileSelector selected" src="assets/tiles/Grass tile.png" onclick="switchTile(event, 0)">
+                <img width="50px" class="tileSelector" src="assets/tiles/Tree tile.png" onclick="switchTile(event, 1)">
+                <img width="50px" class="tileSelector" src="assets/tiles/Desert tile.png" onclick="switchTile(event, 2)">
+                <img width="50px" class="tileSelector" src="assets/tiles/Oasis tile.png" onclick="switchTile(event, 3)">
+            </div>
+            <div class="centerControls">
+                <img width="50px" class="tileSelector" src="assets/tiles/Oasis tile.png" onclick="switchTool(event, 0)">
+            </div>
+            <div class="rightControls">
+                <img width="50px" class="tileSelector" src="assets/buildings/House1 blue.png" onclick="switchTile(event, 4)">
+                <img width="50px" class="tileSelector" src="assets/buildings/House1 pink.png" onclick="switchTile(event, 5)">
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

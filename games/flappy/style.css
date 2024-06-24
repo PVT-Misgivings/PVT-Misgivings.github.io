@@ -1,0 +1,50 @@
+/* Type your CSS code */
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#game{
+    width: 400px;
+    height: 500px;
+    border: 5px double blue;
+    margin: auto;
+    overflow: hidden;
+}
+
+#block {
+    width: 40px;
+    height: 500px; 
+    background: darkgreen;
+    position: relative;
+    left: 400px; 
+}
+
+#hole {
+    width: 40px;
+    height: 100px;
+    background: white;
+    position: relative;
+    left: 400px;
+    top: -500px;
+}
+
+.moving {
+    animation: move 2s infinite linear;
+}
+
+@keyframes move{
+    0%{left: 400px;}
+    100%{left: -50px;}
+}
+
+
+#character{
+    width: 20px;
+    height: 20px;
+    background: blue;
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    border-radius: 100%;
+}
