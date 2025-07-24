@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Realms</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <a href='../'>Back</a>
+    <h1>A piece calculator and tracker for Realms testing.</h1>
+    Instructions:<br>
+    Input your piece type. As damage is done to the piece, input the amount of dmg done, and the computer will update your piece file.<br>
+    <br>
+    <label for="pieceType">Choose piece type:</label>
+    <select id="pieceType" name="pieceType">
+      <option value="swordsman">Swordsman</option>
+      <option value="spearman">Spearman</option>
+      <option value="archer">Archer</option>
+      <option value="cavalry">Cavalry</option>
+      <option value="cannon">Cannon</option>
+      <option value="axeOrc">Axe Orc</option>
+      <option value="spearOrc">Spear Orc</option>
+      <option value="crossbowOrc">Crossbow Orc</option>
+      <option value="wolfOrc">Wolf rider</option>
+      <option value="troll">Troll</option>
+    </select>
+    <br><br>
+    Input the amount of dmg done to this piece here: <br>
+    <input type = "text" id="dmgDone"><br><br>
+    <input type="button" value="CALCULATE" onclick="calculate()"><br>
+    <br><br>
+    <div id=answer>
+      &nbsp;<br>
+      &nbsp;
+    </div><br>
+  </body>
+</html>
