@@ -9,27 +9,32 @@
     Instructions:<br>
     Input your piece type. As damage is done to the piece, input the amount of dmg done, and the computer will update your piece file.<br>
     <br>
-    <label for="pieceType">Choose piece type:</label>
-    <select id="pieceType" name="pieceType">
-      <option value="swordsman">Swordsman</option>
-      <option value="spearman">Spearman</option>
-      <option value="archer">Archer</option>
-      <option value="cavalry">Cavalry</option>
-      <option value="cannon">Cannon</option>
-      <option value="axeOrc">Axe Orc</option>
-      <option value="spearOrc">Spear Orc</option>
-      <option value="crossbowOrc">Crossbow Orc</option>
-      <option value="wolfOrc">Wolf rider</option>
-      <option value="troll">Troll</option>
+    <label for="pieceType">Add piece type:</label>
+    <select id="pieceType">
+      <option disabled>-- Human Units --</option>
+      <option value="Swordsman">Swordsman</option>
+      <option value="Spearman">Spearman</option>
+      <option value="Archer">Archer</option>
+      <option value="Cavalry">Cavalry</option>
+      <option value="Cannon">Cannon</option>
+      <option disabled>-- Orc Units --</option>
+      <option value="Axe Orc">Axe Orc</option>
+      <option value="Spear Orc">Spear Orc</option>
+      <option value="Crossbow Orc">Crossbow Orc</option>
+      <option value="Wolf rider">Wolf rider</option>
+      <option value="Troll">Troll</option>
+    </select>
+    <br><input type="button" value="ADD PIECE" onclick="addPiece()">
+    <br><br>OR<br><br>
+    <label for="existPieces">Select existing piece:</label>
+    <select id="existPieces">
     </select>
     <br><br>
     Input the amount of dmg done to this piece here: <br>
     <input type = "text" id="dmgDone"><br><br>
-    <input type="button" value="CALCULATE" onclick="calculate()"><br>
-    <br><br>
-    <div id=answer>
-      &nbsp;<br>
-      &nbsp;
-    </div><br>
+    <input type="button" value="CALCULATE PIECE" onclick="calculate()">
+    <div id=answer></div><br><br>
+    Active pieces:
+    <div id=pieces></div><br>
   </body>
 </html>
