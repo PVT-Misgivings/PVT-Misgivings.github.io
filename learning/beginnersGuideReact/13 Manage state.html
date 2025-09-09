@@ -1,0 +1,40 @@
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+        function Greeting() {
+            const [name, setName] = React.useState('');
+            const [lastName, setLastName] = React.useState('');
+            const [messages, setMessages] = React.useState([]);
+            const handleChange = event => setName(event.target.value);
+            const handleSubmit = event => setMessages([...messages, `${name} ${lastName} has submitted the page!`]);
+            return (
+                <div>
+                    <form>
+                        <label htmlFor='name'>Name: </label> <br/>
+                        <input value={name} onChange={handleChange} id='name' /><br/>
+                        <label htmlFor='lastName'>Last Name: </label> <br/>
+                        <input onChange={event => setLastName(event.target.value)} id='lastName' /> <br/>
+                        <input type="button" value="submit" onClick={handleSubmit} />
+                    </form>
+                    {name ? <strong>Hello {name} {lastName}</strong> : 'Please type ur name'}
+
+
+                    <br/>
+                    <br/>
+                    <ul>
+                    {messages.map(msg =>
+                        <li>{msg}</li>
+                    )}
+                    </ul>
+                </div>
+            )
+        }
+        const element = <Greeting />
+
+        ReactDOM.render(element, rootElement);
+    </script>
+</body>

@@ -1,0 +1,21 @@
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+        function CharCount({text}) {
+            const length = text.length ? text.length : 'NOOOOOO'
+            return <div>The text "{text}" has <strong>{length}</strong> characters</div>;
+        }
+        
+        const element = (
+            <>
+                <CharCount text='Hello World' />
+                <CharCount text='' />
+            </>
+        );
+
+        ReactDOM.render(element, document.getElementById('root'));
+    </script>
+</body>
